@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Roboto, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.container {
+    width: 100%;
+    max-width: 336px; 
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    
+}
+
+.header-bar {
+    height: 30px;
+    background-color: #FFDC40; 
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+}
+
+.header h1 {
+    font-size: 26px;
+    color: black;
+    margin: 10px;
+}
+.sort-btn{
+    margin-left: 246px;
+    background: none; 
+    border: none;
+    margin-bottom: 8px;
+    cursor: pointer;     
+}
+.sort-btn image{
+    width: 25px; 
+    height: 15px;
+}
+.add-task{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 18px;
+}
+
+#task-input{
+    width: 85%;
+    min-height: 40px;
+    padding: 0;
+    border-radius: 5px;
+    border: solid 1px;
+    border-color: gray;
+    box-sizing: border-box;
+    position: relative;
+    padding: 10px;
+}
+
+.add-btn{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-btn {
+    position: absolute; 
+    right: 44px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    width: 20px; 
+    height: 20px; 
+    cursor: pointer;
+    background: none;
+    border: none;
+
+}
+.delete-container {
+    display: none;
+    position: relative; 
+    width: 100%; 
+}
+
+.todo-list{
+    display: none;
+    border-radius: 10px;
+    border: 1px solid;
+    list-style-type: none;
+    padding: 10px 30px;
+    border-radius: 8px;
+    margin: 10px 25px;
+    width: 67%;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.todo-list .delete-btn{
+    position:static;
+    transform: none;
+    width: auto;
+}
+
+li {
+    display: flex;
+    justify-content: space-between; 
+    width: 100%;
+    margin-bottom: 5px;
+
+}
+.second{
+    display: none;
+}
+.delete-btn:hover .second{
+    display: block;
+    
+}
+.delete-btn:hover .first{
+    display: none;
+}

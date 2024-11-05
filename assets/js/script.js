@@ -33,24 +33,27 @@ class TaskManager {
         this.renderTasks();
     }
 
-    swapTasks(fromIndex, toIndex) {
-        const [removedTask] = this.tasks.splice(fromIndex, 1);
-        this.tasks.splice(toIndex, 0, removedTask);
+    swapTasks(draggedId, dropTargetId) {
+        const draggedIndex = this.tasks.findIndex(task => task.id === parseInt(draggedId));
+        const dropTargetIndex = this.tasks.findIndex(task => task.id === parseInt(dropTargetId));
+
+        const [removedTask] = this.tasks.splice(draggedIndex, 1);
+        this.tasks.splice(dropTargetIndex, 0, removedTask);
+
         this.renderTasks();
     }
 
     renderTasks() {
-        let taskList = document.querySelector('.todo-list');
+        const taskList = document.querySelector('.todo-list');
         taskList.style.display = 'block';
         taskList.innerHTML = '';
-        if (this.tasks.length > 0) {
-            taskList.style.display = 'block';
 
-            this.tasks.forEach((task, index) => {
+        if (this.tasks.length > 0) {
+            this.tasks.forEach((task) => {
                 let li = document.createElement('li');
                 li.classList.add('task-item');
-                li.draggable = true; 
-                li.dataset.index = index;
+                li.draggable = true;
+                li.setAttribute('data-id', task.id);
 
                 let taskDiv = document.createElement('div');
                 taskDiv.classList.add('task-text');
@@ -68,7 +71,6 @@ class TaskManager {
                 let deleteImg2 = document.createElement('img');
                 deleteImg2.src = 'images/Group 70.png';
                 deleteImg2.classList.add('second');
-                deleteImg2.alt = 'delete';
                 deleteBtn.appendChild(deleteImg2);
 
                 deleteBtn.onclick = () => this.deleteTask(task.id);
@@ -87,20 +89,20 @@ class TaskManager {
     }
 
     handleDragStart(event) {
-        event.dataTransfer.setData('text/plain', event.target.dataset.index);
+        event.dataTransfer.setData('text/plain', event.target.getAttribute('data-id'));
     }
 
     handleDragOver(event) {
-        event.preventDefault(); 
+        event.preventDefault();  
     }
 
     handleDrop(event) {
         event.preventDefault();
-        const fromIndex = event.dataTransfer.getData('text');
-        const toIndex = event.target.closest('li').dataset.index;
+        const draggedId = event.dataTransfer.getData('text');
+        const dropTargetId = event.target.closest('li').getAttribute('data-id');
 
-        if (fromIndex !== toIndex) {
-            this.swapTasks(fromIndex, toIndex);
+        if (draggedId !== dropTargetId) {
+            this.swapTasks(draggedId, dropTargetId);
         }
     }
 }
@@ -116,17 +118,17 @@ class App {
 
         sortBtn.addEventListener('mouseover', () => {
             if (this.taskManager.ascending) {
-                sortBtnImg.src = 'images/Group 73.png';  
+                sortBtnImg.src = 'images/Group 73.png';
             } else {
-                sortBtnImg.src = 'images/Group 91.png';  
+                sortBtnImg.src = 'images/Group 91.png';
             }
         });
 
         sortBtn.addEventListener('mouseout', () => {
             if (this.taskManager.ascending) {
-                sortBtnImg.src = 'images/Group 74.png';  
+                sortBtnImg.src = 'images/Group 74.png';
             } else {
-                sortBtnImg.src = 'images/Group 90.png';  
+                sortBtnImg.src = 'images/Group 90.png';
             }
         });
 
